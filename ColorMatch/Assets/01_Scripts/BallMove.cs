@@ -9,6 +9,19 @@ public class BallMove : MonoBehaviour
     public float speed;
     public float Speed { get => speed; set => speed = value; }
 
+    public float delay;
+
+    public ParticleSystem destroyEffect;
+
+    SpriteRenderer sp;
+    AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        sp = GetComponent<SpriteRenderer>();
+    }
+
     private void Update()
     {
         transform.position += moveDir * speed * Time.deltaTime;
@@ -19,16 +32,23 @@ public class BallMove : MonoBehaviour
         if(collision.gameObject.tag == tag)
         {
             Debug.Log("O");
-            Destroy(gameObject);
-            BallSpawn.instance.SpawnBall();
+            StartCoroutine(DestroyBall());
             GameManager.instance.score += 100;
         }
         else
         {
             Debug.Log("X");
-            Destroy(gameObject);
-            BallSpawn.instance.SpawnBall();
+            StartCoroutine(DestroyBall());
             GameManager.instance.score -= 100;
         }
+    }
+
+    IEnumerator DestroyBall()
+    {
+        destroyEffect.Play();
+        sp.enabled = false;
+        yield return new WaitForSeconds(delay);
+        BallSpawn.instance.SpawnBall();
+        Destroy(gameObject);
     }
 }
