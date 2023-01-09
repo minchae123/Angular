@@ -15,13 +15,15 @@ public class BallMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == this.tag)
+        if(collision.gameObject.tag == tag)
         {
             Debug.Log("O");
+            Destroy(gameObject);
         }
         else
         {
             Debug.Log("X");
+            Destroy(gameObject);
         }
     }
 }

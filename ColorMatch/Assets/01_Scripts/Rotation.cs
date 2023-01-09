@@ -13,12 +13,12 @@ public class Rotation : MonoBehaviour
     public void Left()
     {
         angle += -turnAngle;
-        transform.DORotate(new Vector3(0, 0, angle), 1);
+        transform.DORotate(new Vector3(0, 0, angle),0.5f);
     }
 
     public void Right()
     {
         angle += turnAngle;
-        transform.DORotate(new Vector3(0, 0, angle), 1);
+        transform.DORotate(new Vector3(0, 0, angle), 0.5f);
     }
 }
