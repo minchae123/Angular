@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreTxt;
 
-    private void Awake()
+    private void Start()
     {
         scoreTxt.text = GameManager.instance.score.ToString();
     }

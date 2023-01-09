@@ -7,6 +7,7 @@ public class BallMove : MonoBehaviour
     public Vector3 moveDir;
 
     public float speed;
+    public float Speed { get => speed; set => speed = value; }
 
     private void Update()
     {
