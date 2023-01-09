@@ -7,18 +7,39 @@ public class Rotation : MonoBehaviour
 {
     public Transform tr;
 
-    public float turnAngle = 90;    // Angle to turn in degrees;
+    public float turnAngle = 90;
     public float angle;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Left();
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Right();
+        }
+    }
 
     public void Left()
     {
-        angle += -turnAngle;
-        transform.DORotate(new Vector3(0, 0, angle),0.5f);
+        angle += turnAngle;
+        if(angle == 360)
+        {
+            angle = 0;
+        }
+        transform.DORotate(new Vector3(0, 0, angle), 0.1f);
+        
     }
 
     public void Right()
     {
-        angle += turnAngle;
-        transform.DORotate(new Vector3(0, 0, angle), 0.5f);
+        angle -= turnAngle;
+        if (angle == -360)
+        {
+            angle = 0;
+        }
+        transform.DORotate(new Vector3(0, 0, angle), 0.1f);
     }
 }

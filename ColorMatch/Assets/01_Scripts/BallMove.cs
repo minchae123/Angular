@@ -19,11 +19,15 @@ public class BallMove : MonoBehaviour
         {
             Debug.Log("O");
             Destroy(gameObject);
+            BallSpawn.instance.SpawnBall();
+            GameManager.instance.score += 100;
         }
         else
         {
             Debug.Log("X");
             Destroy(gameObject);
+            BallSpawn.instance.SpawnBall();
+            GameManager.instance.score -= 100;
         }
     }
 }

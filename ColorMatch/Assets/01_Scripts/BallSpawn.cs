@@ -4,12 +4,30 @@ using UnityEngine;
 
 public class BallSpawn : MonoBehaviour
 {
+    public static BallSpawn instance;
     public GameObject[] balls;
 
     public Transform[] trans;
 
     public string[] tagName;
     public Color[] ballColor;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+    private void Start()
+    {
+        SpawnBall();   
+    }
 
     private void Update()
     {
