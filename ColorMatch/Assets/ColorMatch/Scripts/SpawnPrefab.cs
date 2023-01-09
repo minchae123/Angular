@@ -21,6 +21,7 @@ public class SpawnPrefab : MonoBehaviour
         {
             GameManager.AddScore();
             GameManager.PlaySound(hitSounds[Random.Range(0, hitSounds.Length)]);
+
         }
         //if not, playing game over sounds and calling GameManager's function to set gameOver state to true;
         else
