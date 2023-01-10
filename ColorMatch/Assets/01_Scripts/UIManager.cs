@@ -13,7 +13,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI overBestScoreTxt;
 
     public GameObject overCanvas;
+    public GameObject escMenu;
     public Animator overAni;
+
+    private bool isEsc = false;
 
     private void Start()
     {
@@ -30,6 +33,43 @@ public class UIManager : MonoBehaviour
         {
             UpSlide();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isEsc)
+            {
+                Resume();
+            }
+            else
+            {
+                EscMenu();
+            }
+        }
+    }
+
+    /*public void EscMenu()
+    {
+        Time.timeScale = 0;
+        isEsc = true;
+        escMenu.transform.DOLocalMove(new Vector3(0, 0, 90), 1);
+    }*/
+
+    public void EscMenu()
+    {
+        Sequence seq = DOTween.Sequence();
+            seq.SetUpdate(true);
+            seq.AppendCallback(() => Time.timeScale = 0);
+            seq.AppendCallback(() => isEsc = true);
+            seq.Append(escMenu.transform.DOLocalMove(new Vector3(0, 0, 90), 1));
+    }
+
+    public void Resume()
+    {
+        Sequence seq = DOTween.Sequence();
+        seq.SetUpdate(true);
+        seq.AppendCallback(() => isEsc = false);
+        seq.AppendCallback(() => escMenu.transform.DOLocalMove(new Vector3(0, 400, 90), 1));
+        Time.timeScale = 1;
     }
 
     public void UpSlide()
@@ -59,5 +99,4 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(s);
         overAni.SetTrigger("Broken");
     }
-
 }
