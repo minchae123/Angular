@@ -17,6 +17,9 @@ public class BallSpawn : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip spawnClip;
 
+    private AudioSource audio;
+    public AudioClip jumpSound;
+
     private void Awake()
     {
         if(instance == null)
@@ -29,6 +32,10 @@ public class BallSpawn : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
+
+        this.audio = this.gameObject.AddComponent<AudioSource>();
+        this.audio.clip = this.jumpSound;
+        this.audio.loop = false;
     }
 
     private void Start()

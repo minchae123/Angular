@@ -13,6 +13,7 @@ public class BtnManager : MonoBehaviour
     public GameObject RectPanel;
     public GameObject HexPanel;
     public GameObject tutPanel;
+    public GameObject TitlePanel;
 
     // 버튼
     public GameObject StartBtn;
@@ -22,6 +23,9 @@ public class BtnManager : MonoBehaviour
     public GameObject SoundOffBtn;
     public GameObject ExitBtn;
     public GameObject GobackBtn;
+
+    private AudioSource audio;
+    public AudioClip ClickSound;
 
 
     private void Awake()
@@ -38,10 +42,16 @@ public class BtnManager : MonoBehaviour
         {
             SoundOffBtn.SetActive(false);
         }
+
+        this.audio = this.gameObject.AddComponent<AudioSource>();
+        this.audio.clip = this.ClickSound;
+        this.audio.loop = false;
     }
 
     public void OnClickStart() // 스타트 클릭시
     {
+        this.audio.Play();
+
         // 사각형 선택
         RectPanel.transform.DOLocalMove(new Vector3(-250, 0, 0), 0.8f);
         RectPanel.SetActive(true);
@@ -57,10 +67,13 @@ public class BtnManager : MonoBehaviour
         StartBtn.SetActive(false);
         tutorialBtn.SetActive(false);
         ExitBtn.SetActive(false);
+        TitlePanel.SetActive(false);
     }
 
     public void OnClickGoBack() // 돌아가기 버튼 클릭시
     {
+        this.audio.Play();
+
         RectPanel.transform.DOLocalMove(new Vector3(-250, 3000, 0), 0.8f);
         HexPanel.transform.DOLocalMove(new Vector3(250, 3000, 0), 0.8f);
         GobackBtn.transform.DOLocalMove(new Vector3(0, 2500, 0), 0.8f);
@@ -68,32 +81,43 @@ public class BtnManager : MonoBehaviour
         StartBtn.SetActive(true);
         tutorialBtn.SetActive(true);
         ExitBtn.SetActive(true);
+        TitlePanel.SetActive(true);
     }
 
     public void OnClickTut() // 튜토리얼 버튼 클릭시
     {
+        this.audio.Play();
+
         tutOutBtn.SetActive(true);
         tutPanel.SetActive(true);
     }
 
     public void OnClickTutOut() // 튜토리얼 X 버튼 클릭시
     {
+        this.audio.Play();
+
         tutOutBtn.SetActive(false);
         tutPanel.SetActive(false);
     }
 
     public void OnClick_RectStart() // 사각형 선택시
     {
+        this.audio.Play();
+
         SceneManager.LoadScene("PlaySquare");
     }
 
     public void OnClick_Hexagon() // 육각형 선택시
     {
+        this.audio.Play();
+
         SceneManager.LoadScene("PlayHexagon");
     }
 
     public void OnCliick_SoundOff() // 사운드 없게 하기 (사운드 ON 이미지 클릭)
     {
+        this.audio.Play();
+
         AudioListener.volume = 0; // 음악 재생 멈추기
 
         SoundOnBtn.SetActive(false);
