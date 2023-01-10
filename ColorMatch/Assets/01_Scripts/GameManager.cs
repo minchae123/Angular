@@ -6,10 +6,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    private UIManager uIManager;
+
     public int score;
     
     public int bestScore = 0;
     private string keyName = "BestScore";
+
+    public int health = 2;
+    public Animator[] heart;
 
 
     private void Awake()
@@ -23,6 +28,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
+        uIManager = FindObjectOfType<UIManager>();
         bestScore = PlayerPrefs.GetInt(keyName, 0);
     }
 
@@ -31,6 +37,11 @@ public class GameManager : MonoBehaviour
         if(score > bestScore)
         {
             PlayerPrefs.SetInt(keyName, score);
+        }
+
+        if(health < 0)
+        {
+            uIManager.UpSlide();
         }
     }
 }

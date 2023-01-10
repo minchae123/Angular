@@ -68,6 +68,7 @@ public class BallMove : MonoBehaviour
         {
             Debug.Log("X");
             StartCoroutine(DestroyBall());
+            GameManager.instance.heart[GameManager.instance.health--].SetTrigger("Remove");
             GameManager.instance.score -= 100;
         }
     }

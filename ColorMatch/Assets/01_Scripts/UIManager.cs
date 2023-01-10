@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI overBestScoreTxt;
 
     public GameObject overCanvas;
+    public Animator overAni;
 
     private void Start()
     {
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
     public void UpSlide()
     {
         overCanvas.transform.DOLocalMove(new Vector3(0, 0, 90), 2);
+        StartCoroutine(Wait(2));
     }
     
     public void QuitGame()
@@ -52,5 +54,10 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(n);
     }
 
+    IEnumerator Wait(float s)
+    {
+        yield return new WaitForSeconds(s);
+        overAni.SetTrigger("Broken");
+    }
 
 }
