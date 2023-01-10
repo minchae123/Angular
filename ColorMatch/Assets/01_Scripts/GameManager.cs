@@ -41,6 +41,12 @@ public class GameManager : MonoBehaviour
 
         if(health < 0)
         {
+            BallMove b = FindObjectOfType<BallMove>();
+            if(b != null)
+            {
+                Destroy(b.gameObject);
+                BallSpawn.instance.StopAllCoroutines();
+            }
             uIManager.UpSlide();
         }
     }
