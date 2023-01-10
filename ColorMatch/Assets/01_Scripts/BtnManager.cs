@@ -27,6 +27,8 @@ public class BtnManager : MonoBehaviour
     private AudioSource audio;
     public AudioClip ClickSound;
 
+    bool OnOff = true;
+
 
     private void Awake()
     {
@@ -114,6 +116,12 @@ public class BtnManager : MonoBehaviour
         SceneManager.LoadScene("PlayHexagon");
     }
 
+    public void OnClickExit()
+    {
+        Debug.Log("나가기");
+    }
+
+    /*
     public void OnCliick_SoundOff() // 사운드 없게 하기 (사운드 ON 이미지 클릭)
     {
         this.audio.Play();
@@ -131,5 +139,20 @@ public class BtnManager : MonoBehaviour
         SoundOnBtn.SetActive(true);
         SoundOffBtn.SetActive(false);
         
+    }
+    */
+
+    public void OnclickOnOff() // 볼륨 조절
+    {
+        if(OnOff)
+        {
+            AudioListener.volume = 0;
+            OnOff = false;
+        }
+        else
+        {
+            AudioListener.volume = 1;
+            OnOff = true;
+        }
     }
 }
