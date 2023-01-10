@@ -47,13 +47,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    /*public void EscMenu()
-    {
-        Time.timeScale = 0;
-        isEsc = true;
-        escMenu.transform.DOLocalMove(new Vector3(0, 0, 90), 1);
-    }*/
-
     public void EscMenu()
     {
         Sequence seq = DOTween.Sequence();
@@ -71,6 +64,7 @@ public class UIManager : MonoBehaviour
         seq.AppendCallback(() => escMenu.transform.DOLocalMove(new Vector3(0, 400, 90), 1));
         Time.timeScale = 1;
     }
+
 
     public void UpSlide()
     {
