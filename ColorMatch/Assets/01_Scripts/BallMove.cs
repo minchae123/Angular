@@ -80,6 +80,6 @@ public class BallMove : MonoBehaviour
         sp.enabled = false;
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
-        //BallSpawn.instance.SpawnBall();
+        BallSpawn.instance.SpawnBall();
     }
 }
