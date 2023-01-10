@@ -9,6 +9,9 @@ public class BallSpawn : MonoBehaviour
     public static BallSpawn instance;
     public GameObject[] balls;
 
+    public int ballCount = 0;
+    public int maxBallCount = 1;
+
     public Transform[] trans;
 
     public string[] tagName;
@@ -49,11 +52,19 @@ public class BallSpawn : MonoBehaviour
         {
             SpawnBall();
         }
+
     }
 
     public void SpawnBall()
     {
-        StartCoroutine(Spawn());
+        if (ballCount < maxBallCount)
+        {
+            StartCoroutine(Spawn());
+        }
+        else
+        {
+            return;
+        }
     }
 
     IEnumerator Spawn()
@@ -67,6 +78,7 @@ public class BallSpawn : MonoBehaviour
         sp.color = ballColor[r1]; // 공의 색을 태그와 값은 랜덤값으로 설정
  
         audioSource.PlayOneShot(spawnClip);
+        ballCount++;
         Instantiate(ball, trans[r].position, Quaternion.identity);
         yield return new WaitForSeconds(spawnDelay);
     }
