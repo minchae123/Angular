@@ -123,15 +123,11 @@ public class BtnManager : MonoBehaviour
 
     public void OnClick_RectStart() // 사각형 선택시
     {
-        this.audios.Play();
-
         SceneManager.LoadScene("PlaySquare");
     }
 
     public void OnClick_Hexagon() // 육각형 선택시
     {
-        this.audios.Play();
-
         SceneManager.LoadScene("PlayHexagon");
     }
 
