@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     bool is2 = false;
     bool is3 = false;
     bool is4 = false;
+    bool is5 = false;
 
     private void Awake()
     {
@@ -108,6 +109,13 @@ public class GameManager : MonoBehaviour
             level = 4;
             StartCoroutine(LevelSetting(level));
             CountDown();
+        }
+        if(score == 3000 && is5 == false)
+        {
+            is5 = true;
+            level = 5;
+            StartCoroutine(LevelSetting(level));
+
         }
     }
 

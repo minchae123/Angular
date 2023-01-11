@@ -15,6 +15,7 @@ public class BallMove : MonoBehaviour
     public float delay;
 
     public bool isCheck = false;
+    public GameObject edge;
     public ParticleSystem destroyEffect;
 
     public AudioClip successAudio;
@@ -54,6 +55,17 @@ public class BallMove : MonoBehaviour
             max += 1.0f;
         }
 
+        if (GameManager.instance.level == 4)
+        {
+            min += 0.6f;
+            max += 1.0f;
+        }
+
+        if (GameManager.instance.level == 5)
+        {
+            min += 0.6f;
+            max += 1.0f;
+        }
         speed = Random.Range(min, max);
     }
 
@@ -68,18 +80,17 @@ public class BallMove : MonoBehaviour
         {
             isCheck = true;
             circleCollider.enabled = false;
+            Destroy(edge);
             StartCoroutine(DestroyBall());
             
             if (collision.gameObject.tag == tag)
             {
                 BallSpawn.instance.isCorrect = true;
-                Debug.Log("O");
                 GameManager.instance.score += 100;
                 audioSource.PlayOneShot(successAudio);
             }
             else
             {
-                Debug.Log("X");
                 GameManager.instance.heart[GameManager.instance.health--].SetTrigger("Remove");
                 audioSource.PlayOneShot(failAudio);
             }

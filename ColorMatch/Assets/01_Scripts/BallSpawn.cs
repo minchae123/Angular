@@ -20,7 +20,6 @@ public class BallSpawn : MonoBehaviour
     public AudioClip spawnClip;
 
     private AudioSource audios;
-    public AudioClip jumpSound;
 
     public bool isCorrect = false;
 
@@ -38,7 +37,6 @@ public class BallSpawn : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         this.audios = this.gameObject.AddComponent<AudioSource>();
-        this.audios.clip = this.jumpSound;
         this.audios.loop = false;
     }
 

@@ -24,7 +24,7 @@ public class InBall : MonoBehaviour
     {
         if(GameManager.instance.health < 2)
         {
-            if (Random.Range(0, 10) < 5)
+            if (Random.Range(0, 10) < 4)
             {
                 isHeart = true;
                 sprite.sprite = heart;

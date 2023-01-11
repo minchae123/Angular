@@ -20,10 +20,7 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //muteBtn = FindObjectOfType<Toggle>();
         muteBtn = GameObject.Find("Mute").GetComponent<Toggle>();
-
-        //CheckMute(muteBtn);
     }
 
     public void CheckMute(Toggle toggle)
