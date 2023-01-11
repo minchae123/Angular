@@ -82,6 +82,14 @@ public class GameManager : MonoBehaviour
             score += 100;
         }
 
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if(health < 2)
+            {
+                Heal();
+            }
+        }
+
         if(score == 500 && is1 == false)
         {
             is1 = true;
@@ -115,7 +123,7 @@ public class GameManager : MonoBehaviour
             is5 = true;
             level = 5;
             StartCoroutine(LevelSetting(level));
-
+            CountDown();
         }
     }
 
@@ -123,7 +131,10 @@ public class GameManager : MonoBehaviour
     {
         tiles[level-1].SetActive(false);
         GameObject d = FindObjectOfType<BallSpawn>().gameObject;
-        Destroy(d);
+        if (d != null)
+        {
+            Destroy(d);
+        }
 
         for(int i = 0; i < 4; i++)
         {
@@ -133,7 +144,6 @@ public class GameManager : MonoBehaviour
         }
 
         tiles[level].SetActive(true);
-        //yield return new WaitForSeconds(4);
         Instantiate(spanwer[level], transform.position, Quaternion.identity);
     }
 
@@ -150,5 +160,12 @@ public class GameManager : MonoBehaviour
         seq.InsertCallback(2f, () => countTxt.text = "1");
         seq.InsertCallback(3f, () => countTxt.text = "GO");
         seq.OnComplete(() => countTxt.gameObject.SetActive(false));
+    }
+
+    public void Heal()
+    {
+        health++;
+        int heal = GameManager.instance.health;
+        heart[heal].SetTrigger("Recover");
     }
 }
