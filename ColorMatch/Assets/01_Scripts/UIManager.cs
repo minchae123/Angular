@@ -92,11 +92,13 @@ public class UIManager : MonoBehaviour
 
     public void RestartGame(int n)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(n);
     }
 
     public void GoTitle(int n)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(n);
     }
 

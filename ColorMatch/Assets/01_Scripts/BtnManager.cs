@@ -29,7 +29,7 @@ public class BtnManager : MonoBehaviour
     private Button ExitBtn_B;
     private Button tutBtn_B;
 
-    private AudioSource audio;
+    private AudioSource audios;
     public AudioClip ClickSound;
     private AudioManager audioManager;
 
@@ -57,9 +57,9 @@ public class BtnManager : MonoBehaviour
             SoundOffBtn.SetActive(false);
         }
 
-        this.audio = this.gameObject.AddComponent<AudioSource>();
-        this.audio.clip = this.ClickSound;
-        this.audio.loop = false;
+        this.audios = this.gameObject.AddComponent<AudioSource>();
+        this.audios.clip = this.ClickSound;
+        this.audios.loop = false;
     }
 
     public void MuteUI(bool isMute)
@@ -69,7 +69,7 @@ public class BtnManager : MonoBehaviour
 
     public void OnClickStart() // 스타트 클릭시
     {
-        this.audio.Play();
+        this.audios.Play();
 
         // 사각형 선택
         RectPanel.transform.DOLocalMove(new Vector3(-250, 0, 0), 0.8f);
@@ -91,7 +91,7 @@ public class BtnManager : MonoBehaviour
 
     public void OnClickGoBack() // 돌아가기 버튼 클릭시
     {
-        this.audio.Play();
+        this.audios.Play();
 
         RectPanel.transform.DOLocalMove(new Vector3(-250, 3000, 0), 0.8f);
         HexPanel.transform.DOLocalMove(new Vector3(250, 3000, 0), 0.8f);
@@ -105,7 +105,7 @@ public class BtnManager : MonoBehaviour
 
     public void OnClickTut() // 튜토리얼 버튼 클릭시
     {
-        this.audio.Play();
+        this.audios.Play();
 
         tutOutBtn.SetActive(true);
         tutPanel.SetActive(true);
@@ -116,7 +116,7 @@ public class BtnManager : MonoBehaviour
 
     public void OnClickTutOut() // 튜토리얼 X 버튼 클릭시
     {
-        this.audio.Play();
+        this.audios.Play();
 
         tutOutBtn.SetActive(false);
         tutPanel.SetActive(false);
@@ -127,14 +127,14 @@ public class BtnManager : MonoBehaviour
 
     public void OnClick_RectStart() // 사각형 선택시
     {
-        this.audio.Play();
+        this.audios.Play();
 
         SceneManager.LoadScene("PlaySquare");
     }
 
     public void OnClick_Hexagon() // 육각형 선택시
     {
-        this.audio.Play();
+        this.audios.Play();
 
         SceneManager.LoadScene("PlayHexagon");
     }
@@ -147,7 +147,7 @@ public class BtnManager : MonoBehaviour
     /*
     public void OnCliick_SoundOff() // 사운드 없게 하기 (사운드 ON 이미지 클릭)
     {
-        this.audio.Play();
+        this.audios.Play();
 
         AudioListener.volume = 0; // 음악 재생 멈추기
 

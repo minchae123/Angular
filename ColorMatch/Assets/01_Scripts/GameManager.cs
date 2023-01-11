@@ -49,5 +49,10 @@ public class GameManager : MonoBehaviour
             }
             uIManager.UpSlide();
         }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            score += 100;
+        }
     }
 }
