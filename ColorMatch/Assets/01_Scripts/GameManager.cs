@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public int health = 2;
     public Animator[] heart;
 
-
     private void Awake()
     {
         if(instance == null)
