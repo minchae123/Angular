@@ -43,7 +43,7 @@ public class BtnManager : MonoBehaviour
 
         ExitBtn_B = GameObject.Find("ExitBtn").GetComponent<Button>();
         tutBtn_B = GameObject.Find("TutorialBtn").GetComponent<Button>();
-
+/*
         if(tutPanel!=null)
         {
             tutPanel.SetActive(false);
@@ -51,7 +51,7 @@ public class BtnManager : MonoBehaviour
         if(tutOutBtn!=null)
         {
             tutOutBtn.SetActive(false);
-        }
+        }*/
         if (SoundOffBtn != null)
         {
             SoundOffBtn.SetActive(false);
@@ -107,8 +107,7 @@ public class BtnManager : MonoBehaviour
     {
         this.audios.Play();
 
-        tutOutBtn.SetActive(true);
-        tutPanel.SetActive(true);
+        tutPanel.transform.DOLocalMove(new Vector3(0, 0, 0), 0.8f);
 
         ExitBtn_B.interactable = false;
         tutBtn_B.interactable = false;
@@ -117,9 +116,8 @@ public class BtnManager : MonoBehaviour
     public void OnClickTutOut() // 튜토리얼 X 버튼 클릭시
     {
         this.audios.Play();
-
-        tutOutBtn.SetActive(false);
-        tutPanel.SetActive(false);
+        
+        tutPanel.transform.DOLocalMove(new Vector3(-250, 3000, 0), 0.8f);
 
         ExitBtn_B.interactable = true;
         tutBtn_B.interactable = true;
