@@ -92,13 +92,13 @@ public class BallMove : MonoBehaviour
         destroyEffect.Play();
         sp.enabled = false;
         yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
 
-        GameObject g = FindObjectOfType<BallSpawn>().gameObject;
+        BallSpawn g = FindObjectOfType<BallSpawn>();
         if (g != null)
         {
             BallSpawn.instance.ballCount--;
             BallSpawn.instance.SpawnBall();
         }
+        Destroy(gameObject);
     }
 }
