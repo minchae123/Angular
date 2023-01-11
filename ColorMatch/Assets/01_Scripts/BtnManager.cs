@@ -13,7 +13,6 @@ public class BtnManager : MonoBehaviour
     // 패널
     public GameObject tutPanel;
     public GameObject TitlePanel;
-    //public GameObject ChoosePanel;
 
     // 버튼
     public GameObject StartBtn;
@@ -31,9 +30,6 @@ public class BtnManager : MonoBehaviour
     private AudioSource audios;
     public AudioClip ClickSound;
     private AudioManager audioManager;
-
-    bool OnOff = true;
-
 
     private void Awake()
     {
@@ -61,50 +57,8 @@ public class BtnManager : MonoBehaviour
 
     public void OnClickStart() // 스타트 클릭시
     {
-        // 두 개 중 고르는 거 사용할 경우 
-        /*
-        audios.Play();
-
-        ChoosePanel.transform.DOLocalMove(new Vector3(0, -1400, 0), 0.8f);
-        
-        *//*// 사각형 선택
-        RectPanel.transform.DOLocalMove(new Vector3(-250, 0, 0), 0.8f);
-        RectPanel.SetActive(true);
-
-        // 육각형 선택
-        HexPanel.SetActive(true);
-        HexPanel.transform.DOLocalMove(new Vector3(250, 0, 0), 0.8f);
-
-        // 돌아가기 버튼
-        GobackBtn.transform.DOLocalMove(new Vector3(0, -450, 0), 0.8f);*//*
-
-        // 버튼 비활성화
-        StartBtn.SetActive(false);
-        tutorialBtn.SetActive(false);
-        ExitBtn.SetActive(false);
-        TitlePanel.SetActive(false);
-        */
-
         SceneManager.LoadScene("PlaySquare");
     }
-
-    /*
-     public void OnClickGoBack() // 돌아가기 버튼 클릭시
-    {
-        audios.Play();
-
-        RectPanel.transform.DOLocalMove(new Vector3(-250, 2000, 0), 0.8f);
-        HexPanel.transform.DOLocalMove(new Vector3(250, 2000, 0), 0.8f);
-        GobackBtn.transform.DOLocalMove(new Vector3(0, 1600, 0), 0.8f);
-
-        ChoosePanel.transform.DOLocalMove(new Vector3(0, 1000, 0), 0.8f);
-
-        StartBtn.SetActive(true);
-        tutorialBtn.SetActive(true);
-        ExitBtn.SetActive(true);
-        TitlePanel.SetActive(true);
-    }
-    */
 
     public void OnClickTut() // 튜토리얼 버튼 클릭시
     {
@@ -128,18 +82,6 @@ public class BtnManager : MonoBehaviour
         tutBtn_B.interactable = true;
     }
     
-    // 사각형 육각형 선택
-    /*
-    public void OnClick_RectStart() // 사각형 선택시
-    {
-        SceneManager.LoadScene("PlaySquare");
-    }
-
-    public void OnClick_Hexagon() // 육각형 선택시
-    {
-        SceneManager.LoadScene("PlayHexagon");
-    }
-    */
 
     public void OnClickExit()
     {
