@@ -33,6 +33,9 @@ public class BallMove : MonoBehaviour
 
     private void Start()
     {
+        if(GameManager.instance.level == 0)
+        {
+        }
         if(GameManager.instance.level == 1)
         {
             min += 0.3f;
@@ -90,7 +93,12 @@ public class BallMove : MonoBehaviour
         sp.enabled = false;
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
-        BallSpawn.instance.ballCount--;
-        BallSpawn.instance.SpawnBall();
+
+        GameObject g = FindObjectOfType<BallSpawn>().gameObject;
+        if (g != null)
+        {
+            BallSpawn.instance.ballCount--;
+            BallSpawn.instance.SpawnBall();
+        }
     }
 }
