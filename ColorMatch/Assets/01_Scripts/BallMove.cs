@@ -17,6 +17,9 @@ public class BallMove : MonoBehaviour
     public bool isCheck = false;
     public ParticleSystem destroyEffect;
 
+    public AudioClip successAudio;
+    public AudioClip failAudio;
+
     SpriteRenderer sp;
     AudioSource audioSource;
     CircleCollider2D circleCollider;
@@ -64,17 +67,22 @@ public class BallMove : MonoBehaviour
             isCheck = true;
             circleCollider.enabled = false;
             StartCoroutine(DestroyBall());
+            
             if (collision.gameObject.tag == tag)
             {
                 BallSpawn.instance.isCorrect = true;
                 Debug.Log("O");
                 GameManager.instance.score += 100;
+
+                audioSource.PlayOneShot(successAudio);
             }
             else
             {
                 Debug.Log("X");
                 GameManager.instance.heart[GameManager.instance.health--].SetTrigger("Remove");
                 GameManager.instance.score -= 100;
+
+                audioSource.PlayOneShot(failAudio);
             }
         }
     }

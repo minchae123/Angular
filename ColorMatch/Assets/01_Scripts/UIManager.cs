@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     private bool isEsc = false;
 
     public AudioManager audioManager;
+    public AudioClip GameOverAudio;
 
     public Toggle muteBtn;
 

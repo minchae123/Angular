@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
     public int health = 2;
     public Animator[] heart;
 
+    public AudioManager audioManager;
+    public AudioClip GameOverAudio;
+    AudioSource audioSource;
+
     private void Awake()
     {
         if(instance == null)
@@ -27,6 +31,8 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
+        audioSource = GetComponent<AudioSource>();
+        audioManager = FindObjectOfType<AudioManager>();
         uIManager = FindObjectOfType<UIManager>();
         bestScore = PlayerPrefs.GetInt(keyName, 0);
     }
@@ -47,6 +53,8 @@ public class GameManager : MonoBehaviour
                 BallSpawn.instance.StopAllCoroutines();
             }
             uIManager.UpSlide();
+
+            audioSource.PlayOneShot(GameOverAudio);
         }
 
         if (Input.GetKeyDown(KeyCode.U))
