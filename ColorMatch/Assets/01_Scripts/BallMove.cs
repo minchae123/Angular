@@ -23,7 +23,6 @@ public class BallMove : MonoBehaviour
     SpriteRenderer sp;
     AudioSource audioSource;
     CircleCollider2D circleCollider;
-    
 
     private void Awake()
     {
@@ -34,23 +33,24 @@ public class BallMove : MonoBehaviour
 
     private void Start()
     {
-/*        if(GameManager.instance.score >= 1500)
+        if(GameManager.instance.level == 1)
         {
             min += 0.3f;
             max += 0.6f;
         }
 
-        if(GameManager.instance.score >= 2300)
+        if (GameManager.instance.level == 2)
         {
             min += 0.5f;
             max += 0.8f;
         }
 
-        if(GameManager.instance.score >= 3000)
+        if(GameManager.instance.level == 3)
         {
             min += 0.9f;
             max += 1.1f;
-        }*/
+        }
+
         speed = Random.Range(min, max);
     }
 
