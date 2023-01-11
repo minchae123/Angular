@@ -20,6 +20,16 @@ public class GameManager : MonoBehaviour
     public AudioClip GameOverAudio;
     AudioSource audioSource;
 
+    public GameObject nemo;
+    public GameObject square;
+    public GameObject hexagon;
+    public GameObject oxtagon;
+
+    public bool is1 = false;
+    public bool is2 = false;
+    public bool is3 = false;
+    public bool is4 = false;
+
     private void Awake()
     {
         if(instance == null)
@@ -60,6 +70,26 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.U))
         {
             score += 100;
+        }
+
+        if(score >= 500)
+        {
+            is1 = true;
+        }
+
+        if(score >= 1000)
+        {
+            is2 = true;
+        }
+
+        if(score >= 1500)
+        {
+            is3 = true;
+        }
+
+        if(score >= 2000)
+        {
+            is4 = true;
         }
     }
 }
