@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class BallSpawn : MonoBehaviour
 {
     public float spawnDelay = 2f;
