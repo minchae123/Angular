@@ -20,8 +20,10 @@ public class BallSpawn : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip spawnClip;
 
-    private AudioSource audio;
+    private AudioSource audios;
     public AudioClip jumpSound;
+
+    public bool isCorrect = false;
 
     private void Awake()
     {
@@ -36,9 +38,9 @@ public class BallSpawn : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        this.audio = this.gameObject.AddComponent<AudioSource>();
-        this.audio.clip = this.jumpSound;
-        this.audio.loop = false;
+        this.audios = this.gameObject.AddComponent<AudioSource>();
+        this.audios.clip = this.jumpSound;
+        this.audios.loop = false;
     }
 
     private void Start()
@@ -57,6 +59,7 @@ public class BallSpawn : MonoBehaviour
 
     public void SpawnBall()
     {
+        isCorrect = false;
         if (ballCount < maxBallCount)
         {
             StartCoroutine(Spawn());
