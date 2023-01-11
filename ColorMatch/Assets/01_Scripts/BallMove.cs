@@ -14,6 +14,7 @@ public class BallMove : MonoBehaviour
 
     public float delay;
 
+    public bool isCheck = false;
     public ParticleSystem destroyEffect;
 
     SpriteRenderer sp;
@@ -58,24 +59,27 @@ public class BallMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == tag)
+        if(isCheck == false)
         {
-            Debug.Log("O");
+            isCheck = true;
+            circleCollider.enabled = false;
             StartCoroutine(DestroyBall());
-            GameManager.instance.score += 100;
-        }
-        else
-        {
-            Debug.Log("X");
-            StartCoroutine(DestroyBall());
-            GameManager.instance.heart[GameManager.instance.health--].SetTrigger("Remove");
-            GameManager.instance.score -= 100;
+            if (collision.gameObject.tag == tag)
+            {
+                Debug.Log("O");
+                GameManager.instance.score += 100;
+            }
+            else
+            {
+                Debug.Log("X");
+                GameManager.instance.heart[GameManager.instance.health--].SetTrigger("Remove");
+                GameManager.instance.score -= 100;
+            }
         }
     }
 
     IEnumerator DestroyBall()
     {
-        circleCollider.enabled = false;
         speed = 0;
         destroyEffect.Play();
         sp.enabled = false;
