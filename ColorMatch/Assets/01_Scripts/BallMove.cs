@@ -45,8 +45,8 @@ public class BallMove : MonoBehaviour
 
         if(GameManager.instance.score >= 3000)
         {
-            min += 0.3f;
-            max += 0.2f;
+            min += 0.9f;
+            max += 1.1f;
         }
         speed = Random.Range(min, max);
         
@@ -66,6 +66,7 @@ public class BallMove : MonoBehaviour
             StartCoroutine(DestroyBall());
             if (collision.gameObject.tag == tag)
             {
+                BallSpawn.instance.isCorrect = true;
                 Debug.Log("O");
                 GameManager.instance.score += 100;
             }
