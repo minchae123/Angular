@@ -136,39 +136,4 @@ public class BtnManager : MonoBehaviour
         Debug.Log("나가기");
         Application.Quit();
     }
-
-    /*
-    public void OnCliick_SoundOff() // 사운드 없게 하기 (사운드 ON 이미지 클릭)
-    {
-        this.audios.Play();
-
-        AudioListener.volume = 0; // 음악 재생 멈추기
-
-        SoundOnBtn.SetActive(false);
-        SoundOffBtn.SetActive(true);
-    }
-
-    public void OnCliick_SoundON() // 사운드 있게 하기 (사운드 OFF 이미지 클릭)
-    {
-        AudioListener.volume = 1; // 음악 다시 재생
-
-        SoundOnBtn.SetActive(true);
-        SoundOffBtn.SetActive(false);
-        
-    }
-    */
-
-    public void OnclickOnOff() // 볼륨 조절
-    {
-        if(OnOff)
-        {
-            AudioListener.volume = 0;
-            OnOff = false;
-        }
-        else
-        {
-            AudioListener.volume = 1;
-            OnOff = true;
-        }
-    }
 }

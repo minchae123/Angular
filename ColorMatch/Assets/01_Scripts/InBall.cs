@@ -22,11 +22,19 @@ public class InBall : MonoBehaviour
 
     private void Start()
     {
-        if (Random.Range(0, 10) < 5)
+        if(GameManager.instance.health < 2)
         {
-            isHeart = true;
-            sprite.sprite = heart;
+            if (Random.Range(0, 10) < 5)
+            {
+                isHeart = true;
+                sprite.sprite = heart;
+            }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        sprite.enabled = false;   
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -34,13 +42,10 @@ public class InBall : MonoBehaviour
         if(isCheck == false)
         {
             isCheck = true;
-            sprite.enabled = false;
-            if (isHeart == true && BallSpawn.instance.isCorrect == true && GameManager.instance.health < 2)
+            if (isHeart == true && BallSpawn.instance.isCorrect == true)
             {
-                Debug.Log("heal");
                 GameManager.instance.health++;
                 int health = GameManager.instance.health;
-                Debug.Log(health);
                 GameManager.instance.heart[health].SetTrigger("Recover");
             }
         }
