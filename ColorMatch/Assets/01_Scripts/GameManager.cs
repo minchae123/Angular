@@ -26,13 +26,16 @@ public class GameManager : MonoBehaviour
     public GameObject[] tiles;
     public int level = 0;
 
+
     public TextMeshProUGUI upgradeTxt;
     public TextMeshProUGUI countTxt;
 
-    public bool is1 = false;
-    public bool is2 = false;
-    public bool is3 = false;
-    public bool is4 = false;
+    public GameObject[] spanwer;
+
+    bool is1 = false;
+    bool is2 = false;
+    bool is3 = false;
+    bool is4 = false;
 
     private void Awake()
     {
@@ -49,6 +52,8 @@ public class GameManager : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         uIManager = FindObjectOfType<UIManager>();
         bestScore = PlayerPrefs.GetInt(keyName, 0);
+
+        Instantiate(spanwer[0], transform.position, Quaternion.identity);
     }
 
     private void Update()
@@ -75,10 +80,43 @@ public class GameManager : MonoBehaviour
         {
             score += 100;
         }
+
+        if(score == 500 && is1 == false)
+        {
+            is1 = true;
+            level = 1;
+            StartCoroutine(LevelSetting(level));
+            CountDown();
+        }
+        if(score == 1000 && is2 == false)
+        {
+            is2 = true;
+            level = 2;
+            StartCoroutine(LevelSetting(level));
+            CountDown();
+        }
+        if(score == 1800 && is3 == false)
+        {
+            is3 = true;
+            level = 3;
+            StartCoroutine(LevelSetting(level));
+            CountDown();
+        }
+        if(score == 2500 && is4 == false)
+        {
+            is4 = true;
+            level = 4;
+            StartCoroutine(LevelSetting(level));
+            CountDown();
+        }
     }
 
     public IEnumerator LevelSetting(int level)
     {
+        tiles[level-1].SetActive(false);
+        GameObject d = FindObjectOfType<BallSpawn>().gameObject;
+        Destroy(d);
+
         for(int i = 0; i < 4; i++)
         {
             upgradeTxt.gameObject.SetActive(true);
@@ -86,24 +124,23 @@ public class GameManager : MonoBehaviour
             upgradeTxt.gameObject.SetActive(false);
         }
 
-        tiles[level - 1].SetActive(false);
-        yield return new WaitForSeconds(2);
         tiles[level].SetActive(true);
+        //yield return new WaitForSeconds(4);
+        Instantiate(spanwer[level], transform.position, Quaternion.identity);
     }
 
-    
-    public IEnumerator CountDown()
+    public void CountDown()
     {
-        countTxt.text = "3";
-        countTxt.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1);
-        countTxt.text = "2";
-        yield return new WaitForSeconds(1);
-        countTxt.text = "1";
-        yield return new WaitForSeconds(1);
-        countTxt.text = "GO!";
-        yield return new WaitForSeconds(1);
-        countTxt.gameObject.SetActive(false);
-        countTxt.text = "3";
+        Sequence seq = DOTween.Sequence();
+        seq.SetUpdate(true);
+        seq.OnRewind(() =>
+        {
+            countTxt.text = $"3";
+            countTxt.gameObject.SetActive(true);
+        });
+        seq.InsertCallback(1f, () => countTxt.text = "2");
+        seq.InsertCallback(2f, () => countTxt.text = "1");
+        seq.InsertCallback(3f, () => countTxt.text = "GO");
+        seq.OnComplete(() => countTxt.gameObject.SetActive(false));
     }
 }

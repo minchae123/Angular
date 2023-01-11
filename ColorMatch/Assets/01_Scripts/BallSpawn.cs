@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class BallSpawn : MonoBehaviour
 {
     public float spawnDelay = 2f;
@@ -73,7 +72,7 @@ public class BallSpawn : MonoBehaviour
     IEnumerator Spawn()
     {
         int r = Random.Range(0, balls.Length); // 공의 랜덤값
-        int r1 = Random.Range(0, balls.Length); // 색과 태그의 랜덤값
+        int r1 = Random.Range(0, tagName.Length); // 색과 태그의 랜덤값
  
         GameObject ball = balls[r]; // 공 게임 오브젝트 공 중에 랜덤
         ball.tag = tagName[r1]; // 공의 태그를 랜덤으로 받아옴

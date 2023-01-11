@@ -33,6 +33,9 @@ public class BallMove : MonoBehaviour
 
     private void Start()
     {
+        if(GameManager.instance.level == 0)
+        {
+        }
         if(GameManager.instance.level == 1)
         {
             min += 0.3f;
@@ -41,14 +44,14 @@ public class BallMove : MonoBehaviour
 
         if (GameManager.instance.level == 2)
         {
-            min += 0.5f;
+            min += 0.4f;
             max += 0.8f;
         }
 
         if(GameManager.instance.level == 3)
         {
-            min += 0.9f;
-            max += 1.1f;
+            min += 0.6f;
+            max += 1.0f;
         }
 
         speed = Random.Range(min, max);
@@ -72,15 +75,12 @@ public class BallMove : MonoBehaviour
                 BallSpawn.instance.isCorrect = true;
                 Debug.Log("O");
                 GameManager.instance.score += 100;
-
                 audioSource.PlayOneShot(successAudio);
             }
             else
             {
                 Debug.Log("X");
                 GameManager.instance.heart[GameManager.instance.health--].SetTrigger("Remove");
-                GameManager.instance.score -= 100;
-
                 audioSource.PlayOneShot(failAudio);
             }
         }
@@ -93,7 +93,12 @@ public class BallMove : MonoBehaviour
         sp.enabled = false;
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
-        BallSpawn.instance.ballCount--;
-        BallSpawn.instance.SpawnBall();
+
+        GameObject g = FindObjectOfType<BallSpawn>().gameObject;
+        if (g != null)
+        {
+            BallSpawn.instance.ballCount--;
+            BallSpawn.instance.SpawnBall();
+        }
     }
 }
