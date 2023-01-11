@@ -11,10 +11,9 @@ using DG.Tweening;
 public class BtnManager : MonoBehaviour
 {
     // 패널
-    public GameObject RectPanel;
-    public GameObject HexPanel;
     public GameObject tutPanel;
     public GameObject TitlePanel;
+    public GameObject ChoosePanel;
 
     // 버튼
     public GameObject StartBtn;
@@ -23,11 +22,11 @@ public class BtnManager : MonoBehaviour
     public GameObject SoundOnBtn;
     public GameObject SoundOffBtn;
     public GameObject ExitBtn;
-    public GameObject GobackBtn;
     public Toggle muteBtn;
 
     private Button ExitBtn_B;
     private Button tutBtn_B;
+    private Button StartBtn_B;
 
     private AudioSource audios;
     public AudioClip ClickSound;
@@ -43,15 +42,8 @@ public class BtnManager : MonoBehaviour
 
         ExitBtn_B = GameObject.Find("ExitBtn").GetComponent<Button>();
         tutBtn_B = GameObject.Find("TutorialBtn").GetComponent<Button>();
-/*
-        if(tutPanel!=null)
-        {
-            tutPanel.SetActive(false);
-        }
-        if(tutOutBtn!=null)
-        {
-            tutOutBtn.SetActive(false);
-        }*/
+        StartBtn_B = GameObject.Find("StartBtn").GetComponent<Button>();
+
         if (SoundOffBtn != null)
         {
             SoundOffBtn.SetActive(false);
@@ -71,7 +63,9 @@ public class BtnManager : MonoBehaviour
     {
         this.audios.Play();
 
-        // 사각형 선택
+        ChoosePanel.transform.DOLocalMove(new Vector3(0, -1400, 0), 0.8f);
+        
+        /*// 사각형 선택
         RectPanel.transform.DOLocalMove(new Vector3(-250, 0, 0), 0.8f);
         RectPanel.SetActive(true);
 
@@ -80,7 +74,7 @@ public class BtnManager : MonoBehaviour
         HexPanel.transform.DOLocalMove(new Vector3(250, 0, 0), 0.8f);
 
         // 돌아가기 버튼
-        GobackBtn.transform.DOLocalMove(new Vector3(0, -450, 0), 0.8f);
+        GobackBtn.transform.DOLocalMove(new Vector3(0, -450, 0), 0.8f);*/
 
         // 버튼 비활성화
         StartBtn.SetActive(false);
@@ -92,10 +86,12 @@ public class BtnManager : MonoBehaviour
     public void OnClickGoBack() // 돌아가기 버튼 클릭시
     {
         this.audios.Play();
-
-        RectPanel.transform.DOLocalMove(new Vector3(-250, 3000, 0), 0.8f);
-        HexPanel.transform.DOLocalMove(new Vector3(250, 3000, 0), 0.8f);
-        GobackBtn.transform.DOLocalMove(new Vector3(0, 2500, 0), 0.8f);
+/*
+        RectPanel.transform.DOLocalMove(new Vector3(-250, 2000, 0), 0.8f);
+        HexPanel.transform.DOLocalMove(new Vector3(250, 2000, 0), 0.8f);
+        GobackBtn.transform.DOLocalMove(new Vector3(0, 1600, 0), 0.8f);
+*/
+        ChoosePanel.transform.DOLocalMove(new Vector3(0, 1000, 0), 0.8f);
 
         StartBtn.SetActive(true);
         tutorialBtn.SetActive(true);
@@ -109,6 +105,7 @@ public class BtnManager : MonoBehaviour
 
         tutPanel.transform.DOLocalMove(new Vector3(0, 0, 0), 0.8f);
 
+        StartBtn_B.interactable = false;
         ExitBtn_B.interactable = false;
         tutBtn_B.interactable = false;
     }
@@ -117,8 +114,9 @@ public class BtnManager : MonoBehaviour
     {
         this.audios.Play();
         
-        tutPanel.transform.DOLocalMove(new Vector3(-250, 3000, 0), 0.8f);
+        tutPanel.transform.DOLocalMove(new Vector3(0, -2000, 0), 0.8f);
 
+        StartBtn_B.interactable = true;
         ExitBtn_B.interactable = true;
         tutBtn_B.interactable = true;
     }
@@ -140,6 +138,7 @@ public class BtnManager : MonoBehaviour
     public void OnClickExit()
     {
         Debug.Log("나가기");
+        Application.Quit();
     }
 
     /*
