@@ -49,9 +49,9 @@ public class BtnManager : MonoBehaviour
             SoundOffBtn.SetActive(false);
         }
 
-        this.audios = this.gameObject.AddComponent<AudioSource>();
-        this.audios.clip = this.ClickSound;
-        this.audios.loop = false;
+        audios = gameObject.AddComponent<AudioSource>();
+        audios.clip = ClickSound;
+        audios.loop = false;
     }
 
     public void MuteUI(bool isMute)
@@ -61,7 +61,7 @@ public class BtnManager : MonoBehaviour
 
     public void OnClickStart() // 스타트 클릭시
     {
-        this.audios.Play();
+        audios.Play();
 
         ChoosePanel.transform.DOLocalMove(new Vector3(0, -1400, 0), 0.8f);
         
@@ -85,7 +85,7 @@ public class BtnManager : MonoBehaviour
 
     public void OnClickGoBack() // 돌아가기 버튼 클릭시
     {
-        this.audios.Play();
+        audios.Play();
 /*
         RectPanel.transform.DOLocalMove(new Vector3(-250, 2000, 0), 0.8f);
         HexPanel.transform.DOLocalMove(new Vector3(250, 2000, 0), 0.8f);
@@ -101,7 +101,7 @@ public class BtnManager : MonoBehaviour
 
     public void OnClickTut() // 튜토리얼 버튼 클릭시
     {
-        this.audios.Play();
+        audios.Play();
 
         tutPanel.transform.DOLocalMove(new Vector3(0, 0, 0), 0.8f);
 
@@ -112,7 +112,7 @@ public class BtnManager : MonoBehaviour
 
     public void OnClickTutOut() // 튜토리얼 X 버튼 클릭시
     {
-        this.audios.Play();
+        audios.Play();
         
         tutPanel.transform.DOLocalMove(new Vector3(0, -2000, 0), 0.8f);
 
