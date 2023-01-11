@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.IO;
 using UnityEngine.Events;
 using DG.Tweening;
@@ -24,6 +25,9 @@ public class BtnManager : MonoBehaviour
     public GameObject ExitBtn;
     public GameObject GobackBtn;
 
+    private Button ExitBtn_B;
+    private Button tutBtn_B;
+
     private AudioSource audio;
     public AudioClip ClickSound;
 
@@ -32,6 +36,9 @@ public class BtnManager : MonoBehaviour
 
     private void Awake()
     {
+        ExitBtn_B = GameObject.Find("ExitBtn").GetComponent<Button>();
+        tutBtn_B = GameObject.Find("TutorialBtn").GetComponent<Button>();
+
         if(tutPanel!=null)
         {
             tutPanel.SetActive(false);
@@ -92,6 +99,9 @@ public class BtnManager : MonoBehaviour
 
         tutOutBtn.SetActive(true);
         tutPanel.SetActive(true);
+
+        ExitBtn_B.interactable = false;
+        tutBtn_B.interactable = false;
     }
 
     public void OnClickTutOut() // 튜토리얼 X 버튼 클릭시
@@ -100,6 +110,9 @@ public class BtnManager : MonoBehaviour
 
         tutOutBtn.SetActive(false);
         tutPanel.SetActive(false);
+
+        ExitBtn_B.interactable = true;
+        tutBtn_B.interactable = true;
     }
 
     public void OnClick_RectStart() // 사각형 선택시
