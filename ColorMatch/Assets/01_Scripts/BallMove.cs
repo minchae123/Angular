@@ -87,7 +87,6 @@ public class BallMove : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
         BallSpawn.instance.ballCount--;
-        Debug.Log("-");
         BallSpawn.instance.SpawnBall();
     }
 }
