@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
@@ -18,8 +19,14 @@ public class UIManager : MonoBehaviour
 
     private bool isEsc = false;
 
+    public AudioManager audioManager;
+
+    public Toggle muteBtn;
+
     private void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.CheckMute(muteBtn);
         scoreTxt.text = GameManager.instance.score.ToString();
     }
 
@@ -45,6 +52,11 @@ public class UIManager : MonoBehaviour
                 EscMenu();
             }
         }
+    }
+
+    public void MuteUI(bool isMute)
+    {
+        audioManager.Mute(isMute);
     }
 
     public void EscMenu()

@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
 using UnityEngine.Events;
 using DG.Tweening;
-
 
 public class BtnManager : MonoBehaviour
 {
@@ -23,15 +23,22 @@ public class BtnManager : MonoBehaviour
     public GameObject SoundOffBtn;
     public GameObject ExitBtn;
     public GameObject GobackBtn;
+    public Toggle muteBtn;
+
 
     private AudioSource audio;
     public AudioClip ClickSound;
+
+    public AudioManager audioManager;
 
     bool OnOff = true;
 
 
     private void Awake()
     {
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.CheckMute(muteBtn);
+
         if(tutPanel!=null)
         {
             tutPanel.SetActive(false);
@@ -48,6 +55,11 @@ public class BtnManager : MonoBehaviour
         this.audio = this.gameObject.AddComponent<AudioSource>();
         this.audio.clip = this.ClickSound;
         this.audio.loop = false;
+    }
+
+    public void MuteUI(bool isMute)
+    {
+        audioManager.Mute(isMute);
     }
 
     public void OnClickStart() // 스타트 클릭시
@@ -119,6 +131,7 @@ public class BtnManager : MonoBehaviour
     public void OnClickExit()
     {
         Debug.Log("나가기");
+        Application.Quit();
     }
 
     /*
@@ -155,4 +168,6 @@ public class BtnManager : MonoBehaviour
             OnOff = true;
         }
     }
+
+
 }
