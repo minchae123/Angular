@@ -34,7 +34,7 @@ public class BallMove : MonoBehaviour
 
     private void Start()
     {
-        if(GameManager.instance.score >= 1500)
+/*        if(GameManager.instance.score >= 1500)
         {
             min += 0.3f;
             max += 0.6f;
@@ -50,9 +50,8 @@ public class BallMove : MonoBehaviour
         {
             min += 0.9f;
             max += 1.1f;
-        }
+        }*/
         speed = Random.Range(min, max);
-        
     }
 
     private void Update()
