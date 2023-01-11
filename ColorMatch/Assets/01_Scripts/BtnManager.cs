@@ -1,22 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 using UnityEngine.Events;
 using DG.Tweening;
 
+
 public class BtnManager : MonoBehaviour
 {
-    // ï¿½Ð³ï¿½
+    // ÆÐ³Î
     public GameObject RectPanel;
     public GameObject HexPanel;
     public GameObject tutPanel;
     public GameObject TitlePanel;
 
-    // ï¿½ï¿½Æ°
+    // ¹öÆ°
     public GameObject StartBtn;
     public GameObject tutorialBtn;
     public GameObject tutOutBtn;
@@ -26,23 +26,21 @@ public class BtnManager : MonoBehaviour
     public GameObject GobackBtn;
     public Toggle muteBtn;
 
-
     private Button ExitBtn_B;
     private Button tutBtn_B;
 
     private AudioSource audio;
     public AudioClip ClickSound;
-
-    public AudioManager audioManager;
+    private AudioManager audioManager;
 
     bool OnOff = true;
 
 
     private void Awake()
     {
-
         audioManager = FindObjectOfType<AudioManager>();
         audioManager.CheckMute(muteBtn);
+
         ExitBtn_B = GameObject.Find("ExitBtn").GetComponent<Button>();
         tutBtn_B = GameObject.Find("TutorialBtn").GetComponent<Button>();
 
@@ -69,29 +67,29 @@ public class BtnManager : MonoBehaviour
         audioManager.Mute(isMute);
     }
 
-    public void OnClickStart() // ï¿½ï¿½Å¸Æ® Å¬ï¿½ï¿½ï¿½ï¿½
+    public void OnClickStart() // ½ºÅ¸Æ® Å¬¸¯½Ã
     {
         this.audio.Play();
 
-        // ï¿½ç°¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // »ç°¢Çü ¼±ÅÃ
         RectPanel.transform.DOLocalMove(new Vector3(-250, 0, 0), 0.8f);
         RectPanel.SetActive(true);
 
-        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // À°°¢Çü ¼±ÅÃ
         HexPanel.SetActive(true);
         HexPanel.transform.DOLocalMove(new Vector3(250, 0, 0), 0.8f);
 
-        // ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
+        // µ¹¾Æ°¡±â ¹öÆ°
         GobackBtn.transform.DOLocalMove(new Vector3(0, -450, 0), 0.8f);
 
-        // ï¿½ï¿½Æ° ï¿½ï¿½È°ï¿½ï¿½È­
+        // ¹öÆ° ºñÈ°¼ºÈ­
         StartBtn.SetActive(false);
         tutorialBtn.SetActive(false);
         ExitBtn.SetActive(false);
         TitlePanel.SetActive(false);
     }
 
-    public void OnClickGoBack() // ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ï¿½ï¿½
+    public void OnClickGoBack() // µ¹¾Æ°¡±â ¹öÆ° Å¬¸¯½Ã
     {
         this.audio.Play();
 
@@ -105,7 +103,7 @@ public class BtnManager : MonoBehaviour
         TitlePanel.SetActive(true);
     }
 
-    public void OnClickTut() // Æ©ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ï¿½ï¿½
+    public void OnClickTut() // Æ©Åä¸®¾ó ¹öÆ° Å¬¸¯½Ã
     {
         this.audio.Play();
 
@@ -116,7 +114,7 @@ public class BtnManager : MonoBehaviour
         tutBtn_B.interactable = false;
     }
 
-    public void OnClickTutOut() // Æ©ï¿½ä¸®ï¿½ï¿½ X ï¿½ï¿½Æ° Å¬ï¿½ï¿½ï¿½ï¿½
+    public void OnClickTutOut() // Æ©Åä¸®¾ó X ¹öÆ° Å¬¸¯½Ã
     {
         this.audio.Play();
 
@@ -127,14 +125,14 @@ public class BtnManager : MonoBehaviour
         tutBtn_B.interactable = true;
     }
 
-    public void OnClick_RectStart() // ï¿½ç°¢ï¿½ï¿½ ï¿½ï¿½ï¿½Ã½ï¿½
+    public void OnClick_RectStart() // »ç°¢Çü ¼±ÅÃ½Ã
     {
         this.audio.Play();
 
         SceneManager.LoadScene("PlaySquare");
     }
 
-    public void OnClick_Hexagon() // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã½ï¿½
+    public void OnClick_Hexagon() // À°°¢Çü ¼±ÅÃ½Ã
     {
         this.audio.Play();
 
@@ -143,24 +141,23 @@ public class BtnManager : MonoBehaviour
 
     public void OnClickExit()
     {
-        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
-        Application.Quit();
+        Debug.Log("³ª°¡±â");
     }
 
     /*
-    public void OnCliick_SoundOff() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½ (ï¿½ï¿½ï¿½ï¿½ ON ï¿½Ì¹ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½)
+    public void OnCliick_SoundOff() // »ç¿îµå ¾ø°Ô ÇÏ±â (»ç¿îµå ON ÀÌ¹ÌÁö Å¬¸¯)
     {
         this.audio.Play();
 
-        AudioListener.volume = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½
+        AudioListener.volume = 0; // À½¾Ç Àç»ý ¸ØÃß±â
 
         SoundOnBtn.SetActive(false);
         SoundOffBtn.SetActive(true);
     }
 
-    public void OnCliick_SoundON() // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½Ï±ï¿½ (ï¿½ï¿½ï¿½ï¿½ OFF ï¿½Ì¹ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½)
+    public void OnCliick_SoundON() // »ç¿îµå ÀÖ°Ô ÇÏ±â (»ç¿îµå OFF ÀÌ¹ÌÁö Å¬¸¯)
     {
-        AudioListener.volume = 1; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½
+        AudioListener.volume = 1; // À½¾Ç ´Ù½Ã Àç»ý
 
         SoundOnBtn.SetActive(true);
         SoundOffBtn.SetActive(false);
@@ -168,7 +165,7 @@ public class BtnManager : MonoBehaviour
     }
     */
 
-    public void OnclickOnOff() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public void OnclickOnOff() // º¼·ý Á¶Àý
     {
         if(OnOff)
         {
@@ -181,6 +178,4 @@ public class BtnManager : MonoBehaviour
             OnOff = true;
         }
     }
-
-
 }
