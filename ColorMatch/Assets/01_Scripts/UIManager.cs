@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
         time += Time.deltaTime;
         if(time >= 10)
         {
-            DisHelper();
+            //DisHelper();
         }
     }
 
@@ -74,8 +74,8 @@ public class UIManager : MonoBehaviour
         i1.DOFade(0, 2);
         i2.DOFade(0, 2);
 
-        StartCoroutine(FadeTextToZero(hTxt));
-        StartCoroutine(FadeTextToZero(hTxt2));
+        //StartCoroutine(FadeTextToZero(hTxt));
+        //StartCoroutine(FadeTextToZero(hTxt2));
     }
 
     public IEnumerator FadeTextToZero(TextMeshProUGUI text)  // 알파값 1에서 0으로 전환
