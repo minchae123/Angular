@@ -15,7 +15,9 @@ public class BallMove : MonoBehaviour
     public float delay;
 
     public bool isCheck = false;
-    public ParticleSystem destroyEffect;
+    public GameObject edge;
+    public ParticleSystem coEffect;
+    public ParticleSystem wrEffect;
 
     public AudioClip successAudio;
     public AudioClip failAudio;
@@ -54,6 +56,17 @@ public class BallMove : MonoBehaviour
             max += 1.0f;
         }
 
+        if (GameManager.instance.level == 4)
+        {
+            min += 0.6f;
+            max += 1.0f;
+        }
+
+        if (GameManager.instance.level == 5)
+        {
+            min += 0.6f;
+            max += 1.0f;
+        }
         speed = Random.Range(min, max);
     }
 
@@ -68,18 +81,20 @@ public class BallMove : MonoBehaviour
         {
             isCheck = true;
             circleCollider.enabled = false;
+            Destroy(edge);
             StartCoroutine(DestroyBall());
             
             if (collision.gameObject.tag == tag)
             {
-                BallSpawn.instance.isCorrect = true;
-                Debug.Log("O");
+                coEffect.Play();
+                Debug.Log(coEffect.isPlaying);
+                BallSpawn.instance.isCorrect = true; 
                 GameManager.instance.score += 100;
                 audioSource.PlayOneShot(successAudio);
             }
             else
             {
-                Debug.Log("X");
+                wrEffect.Play();
                 GameManager.instance.heart[GameManager.instance.health--].SetTrigger("Remove");
                 audioSource.PlayOneShot(failAudio);
             }
@@ -89,16 +104,15 @@ public class BallMove : MonoBehaviour
     IEnumerator DestroyBall()
     {
         speed = 0;
-        destroyEffect.Play();
         sp.enabled = false;
         yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
 
-        GameObject g = FindObjectOfType<BallSpawn>().gameObject;
+        BallSpawn g = FindObjectOfType<BallSpawn>();
         if (g != null)
         {
             BallSpawn.instance.ballCount--;
             BallSpawn.instance.SpawnBall();
         }
+        Destroy(gameObject);
     }
 }

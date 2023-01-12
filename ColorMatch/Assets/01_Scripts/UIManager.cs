@@ -15,7 +15,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject overCanvas;
     public GameObject escMenu;
-    public Animator overAni;
+    public Animator[] overAni;
+    public Animator ani;
 
     private bool isEsc = false;
 
@@ -81,6 +82,7 @@ public class UIManager : MonoBehaviour
 
     public void UpSlide()
     {
+        ani.runtimeAnimatorController = overAni[GameManager.instance.level].runtimeAnimatorController;
         overCanvas.transform.DOLocalMove(new Vector3(0, 0, 90), 2);
         StartCoroutine(Wait(2));
     }
@@ -106,6 +108,7 @@ public class UIManager : MonoBehaviour
     IEnumerator Wait(float s)
     {
         yield return new WaitForSeconds(s);
-        overAni.SetTrigger("Broken");
+        // overAni[GameManager.instance.level].SetTrigger("Broken");
+        ani.SetTrigger("Broken");
     }
 }

@@ -24,7 +24,7 @@ public class InBall : MonoBehaviour
     {
         if(GameManager.instance.health < 2)
         {
-            if (Random.Range(0, 10) < 5)
+            if (Random.Range(0, 10) < 4)
             {
                 isHeart = true;
                 sprite.sprite = heart;
@@ -44,11 +44,13 @@ public class InBall : MonoBehaviour
             isCheck = true;
             if (isHeart == true && BallSpawn.instance.isCorrect == true)
             {
-                GameManager.instance.health++;
-                int health = GameManager.instance.health;
-                GameManager.instance.heart[health].SetTrigger("Recover");
+                    GameManager.instance.health++;
+                    int health = GameManager.instance.health;
+                    GameManager.instance.heart[health].SetTrigger("Recover");
             }
         }
 
     }
+
+
 }
