@@ -79,8 +79,6 @@ public class GameManager : MonoBehaviour
                 BallSpawn.instance.StopAllCoroutines();
             }
             uIManager.UpSlide();
-
-            //audioSource.PlayOneShot(GameOverAudio);
         }
 
         if (Input.GetKeyDown(KeyCode.U))
@@ -137,7 +135,7 @@ public class GameManager : MonoBehaviour
             Destroy(d);
         }
 
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 2; i++)
         {
             upgradeTxt.gameObject.SetActive(true);
             yield return new WaitForSeconds(0.3f);

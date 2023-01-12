@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour
     {
         ani.runtimeAnimatorController = overAni[GameManager.instance.level].runtimeAnimatorController;
         overCanvas.transform.DOLocalMove(new Vector3(0, 0, 90), 2);
-        StartCoroutine(Wait(1.5f));
+        StartCoroutine(Wait(3.5f));
     }
     
     public void QuitGame()
@@ -115,7 +115,7 @@ public class UIManager : MonoBehaviour
     {
         source.PlayOneShot(gameOverAudio);
 
-        yield return new WaitForSeconds(gameOverAudio.length);
+        yield return new WaitForSeconds(gameOverAudio.length - s);
         source.enabled = false;
         ani.SetTrigger("Broken");
     }
