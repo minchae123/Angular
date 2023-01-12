@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
-        //audioSource = GetComponent<AudioSource>();
         audioManager = FindObjectOfType<AudioManager>();
         uIManager = FindObjectOfType<UIManager>();
         bestScore = PlayerPrefs.GetInt(keyName, 0);
@@ -61,7 +60,13 @@ public class GameManager : MonoBehaviour
     {
         if(score > bestScore)
         {
+            bestScore = score;
             PlayerPrefs.SetInt(keyName, score);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            PlayerPrefs.DeleteAll();
         }
 
         if(health < 0)

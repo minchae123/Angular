@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
         time += Time.deltaTime;
         if(time >= 10)
         {
-            
+            DisHelper();
         }
     }
 
