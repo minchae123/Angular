@@ -21,6 +21,5 @@ public class SpinObject : MonoBehaviour
              .SetEase(Ease.Linear)
              .SetLoops(-1);
         yield return null;
-        // yield return new WaitForSeconds(speed);
     }
 }
