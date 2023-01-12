@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
     public Animator[] heart;
 
     public AudioManager audioManager;
-    public AudioClip GameOverAudio;
-    AudioSource audioSource;
+    // public AudioClip GameOverAudio;
+    // AudioSource audioSource;
 
     public GameObject[] tiles;
     public int level = 0;
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
         audioManager = FindObjectOfType<AudioManager>();
         uIManager = FindObjectOfType<UIManager>();
         bestScore = PlayerPrefs.GetInt(keyName, 0);
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
             }
             uIManager.UpSlide();
 
-            audioSource.PlayOneShot(GameOverAudio);
+            //audioSource.PlayOneShot(GameOverAudio);
         }
 
         if (Input.GetKeyDown(KeyCode.U))
