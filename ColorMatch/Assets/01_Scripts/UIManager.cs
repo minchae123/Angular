@@ -21,15 +21,25 @@ public class UIManager : MonoBehaviour
     private bool isEsc = false;
 
     public AudioManager audioManager;
-    public AudioClip GameOverAudio;
+    public AudioClip gameOverAudio;
+    public AudioSource source;
 
     public Toggle muteBtn;
+
+    public GameObject helper;
+    public GameObject helper2;
+    public TextMeshProUGUI hTxt;
+    public TextMeshProUGUI hTxt2;
+
+    float time = 0;
+
 
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         audioManager.CheckMute(muteBtn);
         scoreTxt.text = GameManager.instance.score.ToString();
+        time = 0;
     }
 
     private void Update()
@@ -37,11 +47,6 @@ public class UIManager : MonoBehaviour
         scoreTxt.text = GameManager.instance.score.ToString() + " 점";
         overScoreTxt.text = $"점수 : {GameManager.instance.score.ToString()}" ;
         overBestScoreTxt.text = $"최고 점수 : {GameManager.instance.bestScore.ToString()}";
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            UpSlide();
-        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -53,6 +58,33 @@ public class UIManager : MonoBehaviour
             {
                 EscMenu();
             }
+        }
+
+        time += Time.deltaTime;
+        if(time >= 10)
+        {
+            
+        }
+    }
+
+    public void DisHelper()
+    {
+        Image i1 = helper.GetComponentInChildren<Image>();
+        Image i2 = helper2.GetComponentInChildren<Image>();
+        i1.DOFade(0, 2);
+        i2.DOFade(0, 2);
+
+        StartCoroutine(FadeTextToZero(hTxt));
+        StartCoroutine(FadeTextToZero(hTxt2));
+    }
+
+    public IEnumerator FadeTextToZero(TextMeshProUGUI text)  // 알파값 1에서 0으로 전환
+    {
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+        while (text.color.a > 0.0f)
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - (Time.deltaTime / 2.0f));
+            yield return null;
         }
     }
 
@@ -84,7 +116,7 @@ public class UIManager : MonoBehaviour
     {
         ani.runtimeAnimatorController = overAni[GameManager.instance.level].runtimeAnimatorController;
         overCanvas.transform.DOLocalMove(new Vector3(0, 0, 90), 2);
-        StartCoroutine(Wait(2));
+        StartCoroutine(Wait(1.5f));
     }
     
     public void QuitGame()
@@ -107,8 +139,10 @@ public class UIManager : MonoBehaviour
 
     IEnumerator Wait(float s)
     {
-        yield return new WaitForSeconds(s);
-        // overAni[GameManager.instance.level].SetTrigger("Broken");
+        source.PlayOneShot(gameOverAudio);
+
+        yield return new WaitForSeconds(gameOverAudio.length);
+        source.enabled = false;
         ani.SetTrigger("Broken");
     }
 }

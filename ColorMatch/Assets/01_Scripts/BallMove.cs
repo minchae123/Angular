@@ -87,7 +87,6 @@ public class BallMove : MonoBehaviour
             if (collision.gameObject.tag == tag)
             {
                 coEffect.Play();
-                Debug.Log(coEffect.isPlaying);
                 BallSpawn.instance.isCorrect = true; 
                 GameManager.instance.score += 100;
                 audioSource.PlayOneShot(successAudio);
