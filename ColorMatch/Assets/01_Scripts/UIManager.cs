@@ -26,20 +26,11 @@ public class UIManager : MonoBehaviour
 
     public Toggle muteBtn;
 
-    public GameObject helper;
-    public GameObject helper2;
-    public TextMeshProUGUI hTxt;
-    public TextMeshProUGUI hTxt2;
-
-    float time = 0;
-
-
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         audioManager.CheckMute(muteBtn);
         scoreTxt.text = GameManager.instance.score.ToString();
-        time = 0;
     }
 
     private void Update()
@@ -59,23 +50,6 @@ public class UIManager : MonoBehaviour
                 EscMenu();
             }
         }
-
-        time += Time.deltaTime;
-        if(time >= 10)
-        {
-            //DisHelper();
-        }
-    }
-
-    public void DisHelper()
-    {
-        Image i1 = helper.GetComponentInChildren<Image>();
-        Image i2 = helper2.GetComponentInChildren<Image>();
-        i1.DOFade(0, 2);
-        i2.DOFade(0, 2);
-
-        //StartCoroutine(FadeTextToZero(hTxt));
-        //StartCoroutine(FadeTextToZero(hTxt2));
     }
 
     public IEnumerator FadeTextToZero(TextMeshProUGUI text)  // 알파값 1에서 0으로 전환

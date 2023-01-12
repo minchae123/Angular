@@ -100,35 +100,30 @@ public class GameManager : MonoBehaviour
             is1 = true;
             level = 1;
             StartCoroutine(LevelSetting(level));
-            CountDown();
         }
         if(score == 1000 && is2 == false)
         {
             is2 = true;
             level = 2;
             StartCoroutine(LevelSetting(level));
-            CountDown();
         }
         if(score == 1800 && is3 == false)
         {
             is3 = true;
             level = 3;
             StartCoroutine(LevelSetting(level));
-            CountDown();
         }
         if(score == 2500 && is4 == false)
         {
             is4 = true;
             level = 4;
             StartCoroutine(LevelSetting(level));
-            CountDown();
         }
         if(score == 3000 && is5 == false)
         {
             is5 = true;
             level = 5;
             StartCoroutine(LevelSetting(level));
-            CountDown();
         }
     }
 
@@ -146,25 +141,11 @@ public class GameManager : MonoBehaviour
             upgradeTxt.gameObject.SetActive(true);
             yield return new WaitForSeconds(0.3f);
             upgradeTxt.gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.3f);
         }
 
         tiles[level].SetActive(true);
         Instantiate(spanwer[level], transform.position, Quaternion.identity);
-    }
-
-    public void CountDown()
-    {
-        Sequence seq = DOTween.Sequence();
-        seq.SetUpdate(true);
-        seq.OnRewind(() =>
-        {
-            countTxt.text = $"3";
-            countTxt.gameObject.SetActive(true);
-        });
-        seq.InsertCallback(1f, () => countTxt.text = "2");
-        seq.InsertCallback(2f, () => countTxt.text = "1");
-        seq.InsertCallback(3f, () => countTxt.text = "GO");
-        seq.OnComplete(() => countTxt.gameObject.SetActive(false));
     }
 
     public void Heal()

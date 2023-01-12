@@ -22,7 +22,7 @@ public class InBall : MonoBehaviour
 
     private void Start()
     {
-        if(GameManager.instance.health < 2)
+        if (GameManager.instance.health < 2)
         {
             if (Random.Range(0, 10) < 4)
             {
@@ -34,23 +34,21 @@ public class InBall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        sprite.enabled = false;   
+        sprite.enabled = false;
+        Heal();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public void Heal()
     {
-        if(isCheck == false)
+        if (isCheck == false)
         {
             isCheck = true;
             if (isHeart == true && BallSpawn.instance.isCorrect == true)
             {
-                    GameManager.instance.health++;
-                    int health = GameManager.instance.health;
-                    GameManager.instance.heart[health].SetTrigger("Recover");
+                GameManager.instance.health++;
+                int health = GameManager.instance.health;
+                GameManager.instance.heart[health].SetTrigger("Recover");
             }
         }
-
     }
-
-
 }
